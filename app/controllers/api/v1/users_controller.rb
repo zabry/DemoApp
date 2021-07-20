@@ -19,12 +19,12 @@ class Api::V1::UsersController < ApplicationController
 
     def sendotp
         otp = Faker::Number.number(digits: 4)
-        @user = User.find_by_id(params[:user_id])
+        @user = User.find_by(mobile: params[:mobile])
         @user.update_attribute(:one_time_password, otp)
         @user.update_attribute(:otp_expires_at, Time.now+10)
         
 
-        ##This should not be done, this otp should be sent to mobile number via thrid-party server
+        ##This should not be done, this otp should be sent to mobile number via thrid-party server and not to front end
         render json: @user.as_json(only: [:one_time_password]), status: :ok
     end
 

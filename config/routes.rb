@@ -4,20 +4,23 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :sessions
-        resources :users do
-          put 'sendotp' => "users#sendotp"
-            resources :attempts do
-              resources :attempt_answers
+      resources :sessions, only: [:create, :destroy]
+
+      put 'users/sendotp' => "users#sendotp"
+        resources :users
+            resources :attempts, only: [:create, :update] do
+              resources :attempt_answers, only: [:create, :update]
             end
-        end
-      resources :boards do
-        resources :classrooms do
-          resources :subjects do
-            resources :chapters do
-              resources :reposoitories
-              resources :test_modules do
-                resources :test_questions
+  
+      resources :boards, only: [:index] do
+        resources :classrooms, only: [:index] do
+          resources :subjects, only: [:index] do
+            resources :chapters, only: [:index] do
+
+              get 'reposoitories/showpending' => "reposoitories#showpending"
+              resources :reposoitories, only: [:index, :show, :create, :update]
+              resources :test_modules, only: [:index] do
+                resources :test_questions, only: [:index]
               end
             end
           end

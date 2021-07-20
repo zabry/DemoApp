@@ -1,6 +1,6 @@
 class Api::V1::AttemptAnswersController < ApplicationController
 
-    
+    before_action :authorize_request, only: [:create, :update]
     ## Whenever we click on submitting an answer for a question
     def create
         @answer = AttemptAnswer.new(answer_params)

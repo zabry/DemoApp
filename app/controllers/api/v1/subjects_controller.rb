@@ -2,6 +2,7 @@ class Api::V1::SubjectsController < ApplicationController
 
     before_action :set_classroom
     before_action :set_board
+    before_action :authorize_request, only: [:index]
     
     def index
         render json: @classroom.subjects, status: :ok

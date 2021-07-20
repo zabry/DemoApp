@@ -1,6 +1,9 @@
 class Api::V1::TestModulesController < ApplicationController
 
     before_action :set_chapter
+    before_action :authorize_request, only: [:index]
+
+    ##End Point to list all test modules available in a chapter
     
     def index
         render json: @chapter.test_modules, status: :ok
