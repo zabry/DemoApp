@@ -1,13 +1,12 @@
 FactoryBot.define do
-  factory :user do
+  factory :user_copy do
     name { Faker::Internet.username }
     email { Faker::Internet.email }
     mobile { Faker::Number.number(digits: 3) }
     dob { Faker::Date.in_date_period }
     board_id { nil }
     classroom_id { nil }
-    one_time_password { "1111" }
-    otp_expires_at { "2021-07-20 08:17:03.205971" }
-    authentication_token { "f57440dadcba99db0498" }    
+    one_time_password { nil }
+    otp_expires_at { nil }
   end
 end

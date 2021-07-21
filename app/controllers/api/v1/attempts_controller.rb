@@ -6,8 +6,7 @@ class Api::V1::AttemptsController < ApplicationController
         @attempt = Attempt.new(user_id: @current_user.id, test_module_id: params[:test_module_id])
         @attempt.update_attribute(:started_at, Time.now)
         @attempt.save
-        render json: @attempt, status: :ok
-
+        render json: @attempt, status: :created
     end
 
     

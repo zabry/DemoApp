@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :reposoitory do
-    name { Faker::Lorem.word }
-    chapter { nil }
-    filepath { Faker::Lorem.word }
+    name { Faker::Movies::HarryPotter.character }
+    chapter_id { nil }
+    filepath { Faker::Movies::HarryPotter.quote }
   end
 end

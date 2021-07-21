@@ -13,8 +13,9 @@ class Api::V1::ReposoitoriesController < ApplicationController
 
     def create
 
-        userrepoprogress = UserRepoProgress.find_or_initialize_by(user_id: @current_user.id, reposoitory_id: params[:id])
-        userrepoprogress.update_attribute(:progress, '0.00')
+        @user_repo_progress = UserRepoProgress.find_or_initialize_by(user_id: @current_user.id, reposoitory_id: params[:reposoitory_id])
+        @user_repo_progress.update_attribute(:progress, '0.00')
+        @user_repo_progress.save
 
        head(:created)
 
@@ -22,21 +23,29 @@ class Api::V1::ReposoitoriesController < ApplicationController
 
     ## End Point where users exits a lecture after a certain time
     def update
-        userrepoprogress = UserRepoProgress.find_by(user_id: @current_user.id, reposoitory_id: params[:id])
-        userrepoprogress.update_attribute(:progress, params[:progress])
+        
+        @user_repo_progress = UserRepoProgress.find_by(user_id: @current_user.id, reposoitory_id: params[:id])
+        @user_repo_progress.update_attribute(:progress, params[:progress])
+        @user_repo_progress.save
+        
+
+        head(:ok)
     end
 
     
-    ## Show pending lectures of an user
+    ## Show pending lectures of an user ?????JOINS IN RAILS
     def showpending
-        userrepoprogress = UserRepoProgress.where(user_id: @current_user.id)
-        puts userrepoprogress
-        repo = []
+        ##user_repo_progress = UserRepoProgress.where(user_id: @current_user.id)
+        ## repo = []
 
-        userrepoprogress.each do |n|
-           repo << Reposoitory.where(id: n.reposoitory_id)
-        end
-            render json: repo, status: :ok
+        ##user_repo_progress.each do |n|
+          ## repo << Reposoitory.where(id: n.reposoitory_id)
+        ##end
+
+        repo = @current_user.reposoitories
+        puts repo
+        
+        render json: repo, status: :ok
     end
 
 

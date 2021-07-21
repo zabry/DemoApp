@@ -12,7 +12,11 @@ class Api::V1::UsersController < ApplicationController
     def create
         @user = User.new(user_params)
         @user.save
-        render json: @user, status: :ok
+        if @user
+            render json: @user, status: :created
+        else
+            head(:unprocessable_entity)
+        end
     end
 
     ##End point for SEND OTP Button
@@ -43,11 +47,9 @@ class Api::V1::UsersController < ApplicationController
 
     def user_params
 
+        params.require(:mobile)
+
         params.permit(:name, :email, :mobile, :dob)
-    end
-
-    def auth_user
-
     end
 
 
