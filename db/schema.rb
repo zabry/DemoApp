@@ -120,7 +120,7 @@ ActiveRecord::Schema.define(version: 2021_07_22_045959) do
     t.datetime "otp_expires_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "authentication_token", limit: 30
+    t.string "authentication_token", limit: 512
     t.datetime "token_expiration"
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["board_id"], name: "index_users_on_board_id"

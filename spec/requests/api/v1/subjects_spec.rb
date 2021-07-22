@@ -22,11 +22,5 @@ RSpec.describe "Api::V1::Subjects", type: :request do
     end
   
   end
-
-  def valid_headers
-    {
-      "token" => "f57440dadcba99db0498"
-    }
-  end
   end
 end

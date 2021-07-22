@@ -50,19 +50,13 @@ RSpec.describe "Attempts", type: :request do
           end
 
           context 'when an invalid request' do
-            before { put "/api/v1/attempts/#{ Faker::Number.number(digits: 2) }", params: {},  headers: headers }
+            before { put "/api/v1/attempts/#{attempt.id}", params: {},  headers: invalid_headers }
 
             it 'returns status code 422' do
-                expect(response).to have_http_status(404)
+                expect(response).to have_http_status(401)
               end
           end
 
     end
-    
-    
-    def valid_headers
-      {
-        "token" => "f57440dadcba99db0498"
-      }
-    end
+  
 end

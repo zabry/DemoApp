@@ -30,9 +30,4 @@ RSpec.describe "Api::V1::Chapters", type: :request do
     
   end
 
-  def valid_headers
-    {
-      "token" => "f57440dadcba99db0498"
-    }
-  end
 end

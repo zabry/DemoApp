@@ -7,6 +7,8 @@ Rails.application.routes.draw do
             
             post 'sessions/logout' => "sessions#logout"      
             resources :sessions, only: [:create, :logout]
+
+            
             put 'users/sendotp' => "users#sendotp"
             resources :users
 

@@ -14,7 +14,7 @@ RSpec.describe "Api::V1::Users", type: :request do
 
     describe "POST/ New User Signup" do
 
-      let(:valid_attributes) { {  name: "Username", email: "email@email", dob: "21-01-2021", mobile: "915" } }
+      let(:valid_attributes) { {"user": {  name: "Username", email: "email@email", dob: "21-01-2021", mobile: "915" } }}
   
         context 'when request attributes are valid' do
             before { post "/api/v1/users", params: valid_attributes }
@@ -29,10 +29,10 @@ RSpec.describe "Api::V1::Users", type: :request do
           end
 
           context 'when an invalid request' do
-            before { post "/api/v1/users", params: { name: "Username" } }
+            #before { post "/api/v1/users", params: {"user": { name: "Username" } }}
 
             it 'returns status code 422' do
-                expect(response).to have_http_status(422)
+                expect{ post "/api/v1/users", params: {"user": { name: "Username" } } }.to raise_error(ExceptionHandler::InvalidParameters, 'Invalid User Parameters')
               end
           end
 
@@ -88,15 +88,5 @@ RSpec.describe "Api::V1::Users", type: :request do
         end
       end
     end
-
-
-
-      def valid_headers
-        {
-          "token" => "f57440dadcba99db0498"
-        }
-      end
-
-
 
 end

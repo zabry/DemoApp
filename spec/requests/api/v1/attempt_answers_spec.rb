@@ -23,6 +23,7 @@ RSpec.describe "AttemptAnswers", type: :request do
             before { post "/api/v1/attempts/#{attempt.id}/attempt_answers", params: valid_attributes, headers: headers }
 
             it 'returns status code 201' do
+              puts valid_headers
               expect(response).to have_http_status(201)
             end
           end
@@ -72,11 +73,4 @@ RSpec.describe "AttemptAnswers", type: :request do
 
   end
 
-
-
-  def valid_headers
-    {
-      "token" => "f57440dadcba99db0498"
-    }
-  end
 end

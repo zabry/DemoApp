@@ -25,11 +25,5 @@ RSpec.describe "TestModules", type: :request do
     end
   
   end
-
-  def valid_headers
-    {
-      "token" => "f57440dadcba99db0498"
-    }
-  end
   
 end

@@ -11,11 +11,11 @@ class Api::V1::UsersController < ApplicationController
     ## Endpoint for User signup
     def create
         @user = User.new(user_params)
-        @user.save
-        if @user
+        ## @user.save
+        if @user.save
             render json: @user, status: :created
         else
-            head(:unprocessable_entity)
+            raise(ExceptionHandler::InvalidParameters, 'Invalid User Parameters')
         end
     end
 
@@ -25,7 +25,7 @@ class Api::V1::UsersController < ApplicationController
         otp = Faker::Number.number(digits: 4)
         @user = User.find_by(mobile: params[:mobile])
         @user.update_attribute(:one_time_password, otp)
-        @user.update_attribute(:otp_expires_at, Time.now+10)
+        @user.update_attribute(:otp_expires_at, Time.now+10.hours)
         
 
         ##This should not be done, this otp should be sent to mobile number via thrid-party server and not to front end
@@ -47,9 +47,7 @@ class Api::V1::UsersController < ApplicationController
 
     def user_params
 
-        params.require(:mobile)
-
-        params.permit(:name, :email, :mobile, :dob)
+        params.require(:user).permit(:name, :email, :mobile, :dob)
     end
 
 
