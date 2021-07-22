@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
             
-            resources :sessions, only: [:create, :destroy]
+            post 'sessions/logout' => "sessions#logout"      
+            resources :sessions, only: [:create, :logout]
             put 'users/sendotp' => "users#sendotp"
             resources :users
 

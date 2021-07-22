@@ -7,7 +7,7 @@ FactoryBot.define do
     board_id { nil }
     classroom_id { nil }
     one_time_password { "1111" }
-    otp_expires_at { "2021-07-20 08:17:03.205971" }
+    otp_expires_at { Time.now+5.minutes }
     authentication_token { "f57440dadcba99db0498" }    
   end
 end
